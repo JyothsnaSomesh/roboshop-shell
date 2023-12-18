@@ -59,8 +59,6 @@ unzip /tmp/catalogue.zip &>>$LOGFILE
 
 VALIDATE $? "unzipping catalogue" 
 
-cd /app 
-
 npm install &>>$LOGFILE
 
 VALIDATE $? "Installing dependencies" 
