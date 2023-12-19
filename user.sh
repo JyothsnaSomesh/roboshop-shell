@@ -7,7 +7,6 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
-TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
 MONGODB_HOST=mongodb.daws76devops.online
 
@@ -57,35 +56,35 @@ mkdir -p /app
 
 VALIDATE $? "creating app directory" 
 
-curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>>$LOGFILE
+curl -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>>$LOGFILE
 
-VALIDATE $? "downloading catalogue" 
+VALIDATE $? "downloading user" 
 
 cd /app 
 
-unzip -o /tmp/catalogue.zip &>>$LOGFILE
+unzip -o /tmp/user.zip &>>$LOGFILE
 
-VALIDATE $? "unzipping catalogue" 
+VALIDATE $? "unzipping user" 
 
 npm install &>>$LOGFILE
 
-VALIDATE $? "Installing dependencies" 
+VALIDATE $? "Installing dependencies"
 
-cp /home/centos/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>>$LOGFILE
+cp /home/centos/roboshop-shell/user.service /etc/systemd/system/user.service
 
-VALIDATE $? "copying catalogue service file" 
+VALIDATE $? "copying user service file" 
 
 systemctl daemon-reload &>>$LOGFILE
 
-VALIDATE $? "daemon reload catalogue" 
+VALIDATE $? "daemon reload user" 
 
-systemctl enable catalogue &>>$LOGFILE
+systemctl enable user &>>$LOGFILE
 
-VALIDATE $? "enabling catalogue service file" 
+VALIDATE $? "enabling user service file" 
 
-systemctl start catalogue &>>$LOGFILE
+systemctl start user &>>$LOGFILE
 
-VALIDATE $? "starting catalogue service file" 
+VALIDATE $? "starting user service file" 
 
 cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE
 
@@ -95,9 +94,6 @@ dnf install mongodb-org-shell -y &>>$LOGFILE
 
 VALIDATE $? "Installing mongodb client" 
 
-mongo --host $MONGODB_HOST </app/schema/catalogue.js &>>$LOGFILE
+mongo --host $MONGODB_HOST </app/schema/user.js &>>$LOGFILE
 
-VALIDATE $? "Loading catalogue data into Mongodb" 
-
-
-
+VALIDATE $? "Loading user data into Mongodb" 
