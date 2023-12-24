@@ -14,7 +14,6 @@ else
         INSTANCE_TYPE="t2.micro"
 fi
 
-aws ec2 run-instances --image-id ami-03265a0778a880afb --instance-type $INSTANCE  --security-group-ids sg-sg-042b3bca4427fb7b3  
-"ResourceType=instance,Tags=[{Key=Name,Value=$i}]'
+aws ec2 run-instances --image-id ami-03265a0778a880afb --instance-type $INSTANCE  --security-group-ids sg-042b3bca4427fb7b3  
 
 done
