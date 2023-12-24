@@ -2,7 +2,7 @@
 
 AMI=ami-03265a0778a880afb
 SG_ID=sg-042b3bca4427fb7b3
-INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "User" "cart" "shipping" "Payment" "web" "ratings")
+INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "User" "cart" "shipping" "Payment" "web" "dispatch")
 ZONE_ID=Z025729721K26XR9HFCPR
 DOMAIN_NAME="daws76devops.online"
 
