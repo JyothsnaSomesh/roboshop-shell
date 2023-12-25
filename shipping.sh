@@ -74,14 +74,6 @@ systemctl daemon-reload &>>$LOGFILE
 
 VALIDATE $? "daemon reload shipping" 
 
-systemctl enable Shipping &>>$LOGFILE
-
-VALIDATE $? "enabling Shipping service file" 
-
-systemctl start Shipping &>>$LOGFILE
-
-VALIDATE $? "starting Shipping service file" 
-
 dnf install mysql -y &>>$LOGFILE
 
 VALIDATE $? "starting Shipping service file" 
@@ -89,6 +81,14 @@ VALIDATE $? "starting Shipping service file"
 mysql -h mysql.daws76devops.online -uroot -pRoboShop@1 < /app/schema/shipping.sql &>>$LOGFILE
 
 VALIDATE $? "loading shipping data" 
+
+systemctl enable Shipping &>>$LOGFILE
+
+VALIDATE $? "enabling Shipping service file" 
+
+systemctl start Shipping &>>$LOGFILE
+
+VALIDATE $? "starting Shipping service file" 
 
 systemctl restart shipping &>>$LOGFILE
 
