@@ -31,7 +31,7 @@ else
    echo "You are root user"
 fi
 
-dnf install python36 gcc python3-devel -y
+dnf install python36 gcc python3-devel -y &>>$LOGFILE
  
 VALIDATE $? "Installing python36 "
 
