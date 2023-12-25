@@ -39,7 +39,6 @@ id roboshop
 if [ $? -ne 0 ]
 then
     useradd roboshop 
-
     VALIDATE $? "creating user roboshop" 
 else 
     echo -e "roboshop user already exists $Y skipping $N"
@@ -61,13 +60,15 @@ VALIDATE $? "unzipping user"
 
 mvn clean package &>>$LOGFILE
 
-VALIDATE $? "unzipping user"
+VALIDATE $? "installing dependencies"
 
 mv target/shipping-1.0.jar shipping.jar &>>$LOGFILE
 
-VALIDATE $? "unzipping user"
+VALIDATE $? "renaming jar files"
 
 cp /home/centos/roboshop-shell/shipping.service /etc/systemd/system/shipping.service
+
+VALIDATE $? "copying shipping service"
 
 systemctl daemon-reload &>>$LOGFILE
 
@@ -87,7 +88,7 @@ VALIDATE $? "starting Shipping service file"
 
 mysql -h mysql.daws76devops.online -uroot -pRoboShop@1 < /app/schema/shipping.sql &>>$LOGFILE
 
-VALIDATE $? "starting Shipping service file" 
+VALIDATE $? "loading shipping data" 
 
 systemctl restart shipping &>>$LOGFILE
 
